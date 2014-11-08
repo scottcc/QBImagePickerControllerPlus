@@ -255,6 +255,11 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
 
 - (void)passSelectedAssetsToDelegate
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(qb_imagePickerController:didSelectAssetsUrl:)]) {
+        [self.delegate qb_imagePickerController:self didSelectAssets:[self.selectedAssetURLs copy]];
+        return;
+    }
+
     // Load assets from URLs
     __block NSMutableArray *assets = [NSMutableArray array];
     
@@ -372,7 +377,7 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
     } else {
         // Delegate
         if (self.delegate && [self.delegate respondsToSelector:@selector(qb_imagePickerController:didSelectAsset:)]) {
-			[self.delegate qb_imagePickerController:self didSelectAsset:asset];
+            [self.delegate qb_imagePickerController:self didSelectAsset:asset];
         }
     }
 }
