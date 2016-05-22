@@ -354,6 +354,7 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
     ALAssetsGroup *assetsGroup = self.assetsGroups[indexPath.row];
     assetsCollectionViewController.delegate = self;
     assetsCollectionViewController.assetsGroup = assetsGroup;
+    assetsCollectionViewController.view.frame = self.view.frame;
     
     for (NSURL *assetURL in self.selectedAssetURLs) {
         [assetsCollectionViewController selectAssetHavingURL:assetURL];
