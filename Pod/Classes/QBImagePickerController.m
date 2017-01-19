@@ -97,7 +97,7 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
     // View controller settings
     self.title = NSLocalizedStringFromTableInBundle(@"title",
                                                     @"QBImagePickerController",
-                                                    [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"QBImagePickerController" ofType:@"bundle"]],
+                                                    [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"QBImagePickerControllerPlus" ofType:@"bundle"]],
                                                     nil);
 }
 
