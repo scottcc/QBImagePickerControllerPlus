@@ -97,7 +97,7 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
     static dispatch_once_t onceToken;
     static NSBundle *resourcesBundle = nil;
     dispatch_once(&onceToken, ^{
-        NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"QBImagePickerControllerPlus" withExtension:@"bundle"];
+        NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"QBImagePickerController" withExtension:@"bundle"];
         resourcesBundle = [NSBundle bundleWithURL:url];
     });
 
