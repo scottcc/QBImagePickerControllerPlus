@@ -94,10 +94,17 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
 {
     [super viewDidLoad];
     
+    static dispatch_once_t onceToken;
+    static NSBundle *resourcesBundle = nil;
+    dispatch_once(&onceToken, ^{
+        NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"QBImagePickerControllerPlus" withExtension:@"bundle"];
+        resourcesBundle = [NSBundle bundleWithURL:url];
+    });
+
     // View controller settings
     self.title = NSLocalizedStringFromTableInBundle(@"title",
                                                     @"QBImagePickerController",
-                                                    [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"QBImagePickerControllerPlus" ofType:@"bundle"]],
+                                                    resourcesBundle,
                                                     nil);
 }
 

@@ -235,6 +235,13 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
+    static dispatch_once_t onceToken;
+    static NSBundle *resourcesBundle = nil;
+    dispatch_once(&onceToken, ^{
+        NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"QBImagePickerControllerPlus" withExtension:@"bundle"];
+        resourcesBundle = [NSBundle bundleWithURL:url];
+    });
+    
     if (kind == UICollectionElementKindSectionFooter) {
         QBAssetsCollectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                                       withReuseIdentifier:@"FooterView"
@@ -256,7 +263,7 @@
                 }
                 footerView.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(format,
                                                                                                           @"QBImagePickerController",
-                                                                                                          [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"QBImagePickerControllerPlus" ofType:@"bundle"]],
+                                                                                                          resourcesBundle,
                                                                                                           nil),
                                              self.numberOfPhotos,
                                              self.numberOfVideos
@@ -268,7 +275,7 @@
                 NSString *format = (self.numberOfPhotos == 1) ? @"format_photo" : @"format_photos";
                 footerView.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(format,
                                                                                                           @"QBImagePickerController",
-                                                                                                          [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"QBImagePickerControllerPlus" ofType:@"bundle"]],
+                                                                                                          resourcesBundle,
                                                                                                           nil),
                                                                                                   self.numberOfPhotos
                                                                                                   ];
@@ -279,7 +286,7 @@
                 NSString *format = (self.numberOfVideos == 1) ? @"format_video" : @"format_videos";
                 footerView.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(format,
                                                                                                           @"QBImagePickerController",
-                                                                                                          [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"QBImagePickerControllerPlus" ofType:@"bundle"]],
+                                                                                                          resourcesBundle,
                                                                                                           nil),
                                                                                                   self.numberOfVideos
                                                                                                   ];
